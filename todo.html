@@ -1,0 +1,48 @@
+<!-- 1.A浏览器首先加载并解析 todo.html 从上到下依次读取标签解析 <head> 时，
+    发现 <link rel="stylesheet" href="todo.css">，会并行加载 todo.css,解析 CSS 内容并构建 CSS 样式树，但不阻塞 HTML 解析-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的待办</title>
+    <link rel="stylesheet" href="todo.css">
+</head>
+
+<!--1. B.继续解析 <body> 中的结构 构建 DOM 树 -->
+
+<body>
+
+    <div class="container">
+        <!--语义化结构标签，用于定义网页或某个独立内容区块（如文章、章节、卡片）的 “头部区域”-->
+        <header>
+            <h1>待办事项</h1>
+            <p id="task-count">当前有0个待办任务</p>
+        </header>
+
+        <div class="input-section">
+            <!-- 添加 label 并关联输入框 -->
+            <label for="task-input" class="sr-only">输入任务</label>
+            <!-- 设置输入框的占位提示文本，当输入框为空时显示，用于提示用户该输入框的用途 -->
+            <input type="text" id="task-input" placeholder="输入任务..." maxlength="50">
+            <button id="add-btn" title="添加任务"></button>
+        </div>
+
+        <ul id="task-list" class="task-list">
+            <!-- 任务会动态添加到这里 -->
+        </ul>
+
+        <div class="action-buttons">
+            <!-- data-icon 是 HTML 中的自定义数据属性（以 data- 为前缀），用于存储与元素相关的额外数据 是存储图标的 “地址”-->
+            <button id="clear-all" data-icon="mti-清除 (1).png" title="清除所有任务">清除所有</button>
+            <button id="clear-completed" data-icon="mti-清除.png" title="清除已完成任务">清除已完成</button>
+        </div>
+
+    </div>
+
+    <!--1.C. 当解析到 <script src="todo.js"></script> 时，会暂停 HTML 解析，先加载并执行 todo.js -->
+    <script src="todo.js"></script>
+</body>
+
+</html>
